@@ -1,3 +1,5 @@
+import type { CvData } from "../types/cv"
+
 export const cvData: CvData = {
   personal: {
     name: "Kevin David Cerpa Santander",
