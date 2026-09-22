@@ -2,6 +2,30 @@
 @config "../tailwind.config.cjs";
 
 @layer base {
+  :root {
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --primary: #2563EB;
+    --secondary: #60A5FA;
+    --ink: #0F172A;
+    --muted: #64748B;
+    --line: #E2E8F0;
+  }
+
+  .dark {
+    --background: #020617;
+    --surface: #0F172A;
+    --primary: #3B82F6;
+    --secondary: #93C5FD;
+    --ink: #F8FAFC;
+    --muted: #94A3B8;
+    --line: #1E293B;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   *,
   *::before,
   *::after {
@@ -12,16 +36,11 @@
 
   body {
     font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--background);
+    color: var(--ink);
     line-height: 1.6;
     -webkit-text-size-adjust: 100%;
-  }
-
-  :root.dark body,
-  .dark body {
-    background-color: #111827;
-    color: #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -37,10 +56,6 @@
     transition: color 0.2s ease;
   }
 
-  a:hover {
-    text-decoration: underline;
-  }
-
   button {
     font-family: inherit;
     cursor: pointer;
@@ -54,7 +69,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
   }
 }

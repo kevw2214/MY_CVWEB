@@ -7,8 +7,17 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        background: "var(--background)",
+        surface: "var(--surface)",
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
+        ink: "var(--ink)",
+        muted: "var(--muted)",
+        line: "var(--line)",
+      },
       borderColor: {
-        DEFAULT: "currentColor",
+        DEFAULT: "var(--line)",
       },
     },
   },

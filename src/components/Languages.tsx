@@ -1,4 +1,6 @@
 import type { Language } from "../types/cv"
+import { Languages as LanguagesIcon } from "lucide-react"
+import { Section } from "./Section"
 
 interface LanguagesProps {
   data: Language[]
@@ -8,22 +10,25 @@ export function Languages({ data }: LanguagesProps) {
   if (data.length === 0) return null
 
   return (
-    <section id="languages" className="py-10 max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-black dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
-        Idiomas
-      </h2>
-      <div className="space-y-3">
+    <Section id="languages" title="Idiomas">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {data.map((lang) => (
-          <div key={lang.id} className="border-l-4 border-gray-300 dark:border-gray-600 pl-3 pb-3 transition-colors hover:border-gray-400 dark:hover:border-gray-500">
-            <p className="text-xl font-bold text-black dark-text-white">
-              {lang.language}
-            </p>
-            <p className="text-gray-600 dark:text-gray-300">
-              {lang.level}
-            </p>
-          </div>
+          <article
+            key={lang.id}
+            className="flex items-center gap-4 rounded-xl border border-line bg-background p-4 transition-colors hover:border-primary"
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <LanguagesIcon className="h-5 w-5" />
+            </div>
+            <div className="flex min-w-0 flex-1 items-center justify-between gap-2">
+              <h3 className="truncate text-base font-semibold text-ink">{lang.language}</h3>
+              <span className="shrink-0 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                {lang.level}
+              </span>
+            </div>
+          </article>
         ))}
       </div>
-    </section>
+    </Section>
   )
 }

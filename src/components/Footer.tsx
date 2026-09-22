@@ -1,3 +1,5 @@
+import { GithubIcon, LinkedinIcon } from "./icons"
+
 interface FooterProps {
   name: string
   linkedin: string
@@ -8,32 +10,35 @@ export function Footer({ name, linkedin, github }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-700 py-6 max-w-7xl mx-auto">
-      <p className="text-center text-sm text-gray-600 dark:text-gray-300">
-        {name} - {currentYear}
-      </p>
-      <div className="mt-3 flex justify-center sm:justify-start gap-3">
-        {linkedin && (
-          <a
-            href={`https://linkedin.com/${linkedin}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-300 hover:text-gray-300 transition-colors text-sm"
-          >
-            LinkedIn
-          </a>
-        )}
-
-        {github && (
-          <a
-            href={`https://github.com/${github}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-300 hover:text-gray-300 transition-colors text-sm"
-          >
-            GitHub
-          </a>
-        )}
+    <footer className="border-t border-line py-6">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row sm:px-6">
+        <p className="text-sm text-muted">
+          {name} · {currentYear}
+        </p>
+        <div className="flex items-center gap-2">
+          {linkedin !== "" && (
+            <a
+              href={`https://linkedin.com/${linkedin}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-primary hover:text-primary"
+            >
+              <LinkedinIcon className="h-4 w-4" />
+            </a>
+          )}
+          {github !== "" && (
+            <a
+              href={`https://github.com/${github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-primary hover:text-primary"
+            >
+              <GithubIcon className="h-4 w-4" />
+            </a>
+          )}
+        </div>
       </div>
     </footer>
   )
