@@ -13,11 +13,18 @@ export function ThemeToggle() {
 
   return (
     <button
+      type="button"
       onClick={() => setDark((prev) => !prev)}
-      className="shrink-0 rounded-lg p-2 text-muted transition-colors hover:bg-primary/10 hover:text-primary"
-      aria-label="Cambiar modo claro/oscuro"
+      className="theme-toggle"
+      aria-label={dark ? "Activar modo claro" : "Activar modo oscuro"}
+      aria-pressed={dark}
+      title={dark ? "Activar modo claro" : "Activar modo oscuro"}
     >
-      {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      {dark ? (
+        <Sun aria-hidden="true" className="h-5 w-5" />
+      ) : (
+        <Moon aria-hidden="true" className="h-5 w-5" />
+      )}
     </button>
   )
 }

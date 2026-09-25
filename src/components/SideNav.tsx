@@ -1,22 +1,41 @@
-import { useEffect, useState } from "react"
-import { Briefcase, GraduationCap, Mail, User, Wrench } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
 import { ThemeToggle } from "./ThemeToggle"
 
 const NAV_ITEMS = [
-  { id: "about", label: "Sobre mí", icon: User },
-  { id: "experience", label: "Experiencia", icon: Briefcase },
-  { id: "education", label: "Educación", icon: GraduationCap },
-  { id: "skills", label: "Habilidades", icon: Wrench },
-  { id: "contact", label: "Contacto", icon: Mail },
+  { id: "about", label: "Perfil" },
+  { id: "experience", label: "Experiencia" },
+  { id: "education", label: "Formación" },
+  { id: "skills", label: "Habilidades" },
+  { id: "certifications", label: "Certificaciones" },
+  { id: "languages", label: "Idiomas" },
+  { id: "contact", label: "Contacto" },
 ] as const
 
-export function SideNav() {
-  const [active, setActive] = useState<string>(NAV_ITEMS[0].id)
+interface SideNavProps {
+  name: string
+  availableSections: string[]
+}
+
+export function SideNav({ name, availableSections }: SideNavProps) {
+  const items = useMemo(
+    () => NAV_ITEMS.filter((item) => availableSections.includes(item.id)),
+    [availableSections]
+  )
+  const [active, setActive] = useState<string>(items[0]?.id ?? "about")
+
+  const nameParts = name.trim().split(/\s+/).filter(Boolean)
+  const shortName =
+    nameParts.length > 2
+      ? `${nameParts[0] ?? ""} ${nameParts[nameParts.length - 2] ?? ""}`
+      : name
+  const initials = `${nameParts[0]?.[0] ?? ""}${nameParts[nameParts.length > 2 ? nameParts.length - 2 : 1]?.[0] ?? ""}`.toUpperCase()
 
   useEffect(() => {
-    const sections = NAV_ITEMS
+    const sections = items
       .map((item) => document.getElementById(item.id))
       .filter((el): el is HTMLElement => el !== null)
+
+    if (sections.length === 0) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,36 +48,38 @@ export function SideNav() {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [])
+  }, [items])
 
   return (
-    <nav
-      aria-label="Navegación principal"
-      className="fixed z-40 flex bg-surface border-line top-0 left-0 right-0 h-16 flex-row items-center px-3 border-b lg:bottom-0 lg:right-auto lg:h-auto lg:w-20 lg:flex-col lg:border-b-0 lg:border-r lg:px-0 lg:py-4"
-    >
-      <div className="flex flex-1 items-center gap-1 overflow-x-auto lg:w-full lg:flex-col lg:justify-center lg:gap-2 lg:overflow-visible">
-        {NAV_ITEMS.map((item) => {
-          const isActive = active === item.id
-          return (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              aria-current={isActive ? "true" : undefined}
-              className={`flex shrink-0 flex-col items-center gap-1 rounded-lg px-3 py-2 transition-colors lg:w-14 ${
-                isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted hover:bg-primary/10 hover:text-primary"
-              }`}
-            >
-              <item.icon className="h-5 w-5" />
-              <span className="hidden text-[10px] font-medium leading-tight lg:block lg:text-center">
-                {item.label}
-              </span>
-            </a>
-          )
-        })}
+    <nav aria-label="Navegación principal" className="site-nav">
+      <div className="site-nav__inner">
+        <a className="site-brand" href="#top" aria-label={`${name}, volver al inicio`}>
+          <span aria-hidden="true" className="site-brand__mark">
+            {initials}
+          </span>
+          <span className="site-brand__name">{shortName}</span>
+        </a>
+
+        <div className="site-nav__scroll">
+          <div className="site-nav__links">
+            {items.map((item) => {
+              const isActive = active === item.id
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`site-nav__link${isActive ? " is-active" : ""}`}
+                >
+                  {item.label}
+                </a>
+              )
+            })}
+          </div>
+        </div>
+
+        <ThemeToggle />
       </div>
-      <ThemeToggle />
     </nav>
   )
 }

@@ -10,19 +10,19 @@ export function Footer({ name, linkedin, github }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-line py-6">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row sm:px-6">
-        <p className="text-sm text-muted">
-          {name} · {currentYear}
+    <footer className="site-footer">
+      <div className="site-footer__inner">
+        <p>
+          {name} <span>{currentYear}</span>
         </p>
-        <div className="flex items-center gap-2">
+        <nav aria-label="Redes profesionales" className="site-footer__links">
           {linkedin !== "" && (
             <a
               href={`https://linkedin.com/${linkedin}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-primary hover:text-primary"
+              className="social-link"
             >
               <LinkedinIcon className="h-4 w-4" />
             </a>
@@ -33,12 +33,12 @@ export function Footer({ name, linkedin, github }: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-primary hover:text-primary"
+              className="social-link"
             >
               <GithubIcon className="h-4 w-4" />
             </a>
           )}
-        </div>
+        </nav>
       </div>
     </footer>
   )

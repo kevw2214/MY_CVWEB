@@ -11,6 +11,8 @@ export interface PersonalInfo {
 
 export interface Profile {
   summary: string
+  heroSummary: string
+  focusAreas: string[]
 }
 
 export interface Experience {

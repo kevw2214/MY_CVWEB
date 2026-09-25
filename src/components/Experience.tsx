@@ -10,40 +10,50 @@ export function Experience({ data }: ExperienceProps) {
 
   return (
     <Section id="experience" title="Experiencia">
-      <ol className="relative ml-1.5 space-y-8 border-l border-line">
+      <ol className="experience-list">
         {data.map((exp) => (
-          <li key={exp.id} className="relative pl-6">
-            <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-primary/15" />
-
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-lg font-semibold text-ink">{exp.position}</h3>
-              <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                {exp.startDate} – {exp.endDate || "Presente"}
-              </span>
-            </div>
-
-            <p className="mt-0.5 text-sm font-medium text-muted">
-              {exp.company} · {exp.location}
+          <li key={exp.id} className="experience-item">
+            <p className="experience-period">
+              {exp.startDate} — {exp.endDate || "Presente"}
             </p>
 
-            {exp.description !== "" && (
-              <p className="mt-2 text-sm text-muted">{exp.description}</p>
-            )}
-
-            {exp.responsibilities.length > 0 && (
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted marker:text-primary">
-                {exp.responsibilities.map((responsibility, i) => (
-                  <li key={i}>{responsibility}</li>
-                ))}
-              </ul>
-            )}
-
-            {exp.achievements.length > 0 && (
-              <p className="mt-2 text-sm text-ink">
-                <span className="font-semibold">Logros: </span>
-                {exp.achievements.join(", ")}
+            <div className="experience-entry">
+              <h3>{exp.position}</h3>
+              <p className="experience-company">
+                <span>{exp.company}</span>
+                {exp.location !== "" && <span>{exp.location}</span>}
               </p>
-            )}
+
+              {exp.description !== "" && (
+                <p className="experience-description">{exp.description}</p>
+              )}
+
+              {(exp.responsibilities.length > 0 || exp.achievements.length > 0) && (
+                <div className="experience-details">
+                  {exp.responsibilities.length > 0 && (
+                    <div>
+                      <h4>Responsabilidades</h4>
+                      <ul className="resume-list">
+                        {exp.responsibilities.map((responsibility) => (
+                          <li key={responsibility}>{responsibility}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {exp.achievements.length > 0 && (
+                    <div>
+                      <h4>Aportes clave</h4>
+                      <ul className="resume-list">
+                        {exp.achievements.map((achievement) => (
+                          <li key={achievement}>{achievement}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </li>
         ))}
       </ol>

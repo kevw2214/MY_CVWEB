@@ -3,7 +3,7 @@ import type { CvData } from "../types/cv"
 export const cvData: CvData = {
   personal: {
     name: "Kevin David Cerpa Santander",
-    profession: "Full Stack Developer & Data Analyst",
+    profession: "Desarrollador Full Stack y analista de datos",
     location: "Barranquilla, Colombia",
     email: "kevindavidcerpa@gmail.com",
     phone: "+57 3012042883",
@@ -14,7 +14,14 @@ export const cvData: CvData = {
 
   profile: {
     summary:
-      "Ingeniero de Sistemas con experiencia en desarrollo Full Stack y análisis de datos. Con conocimientos en React, JavaScript, Node.js, Python, SQL Server, Power BI y Excel. Experiencia participando en proyectos empresariales enfocados en el desarrollo de soluciones digitales, generación de reportes, construcción de dashboards e indicadores para la toma de decisiones. Orientado a la resolución de problemas, mejora continua de procesos y trabajo en equipos multidisciplinarios bajo metodologías ágiles.",
+      "Ingeniero de Sistemas con experiencia en desarrollo Full Stack y análisis de datos. He participado en proyectos empresariales creando soluciones digitales, dashboards e indicadores para apoyar la toma de decisiones. Me enfoco en resolver problemas y mejorar procesos junto a equipos multidisciplinarios bajo metodologías ágiles.",
+    heroSummary:
+      "Uno desarrollo Full Stack y análisis de datos para apoyar procesos operativos y convertir información en decisiones más claras.",
+    focusAreas: [
+      "Desarrollo de aplicaciones",
+      "Análisis de operaciones",
+      "Visualización de datos",
+    ],
   },
 
   experience: [

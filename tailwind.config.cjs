@@ -16,6 +16,10 @@ module.exports = {
         muted: "var(--muted)",
         line: "var(--line)",
       },
+      fontFamily: {
+        sans: ["Source Sans 3", "sans-serif"],
+        display: ["Barlow Semi Condensed", "sans-serif"],
+      },
       borderColor: {
         DEFAULT: "var(--line)",
       },

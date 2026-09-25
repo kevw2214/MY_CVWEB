@@ -4,17 +4,20 @@ interface SectionProps {
   id: string
   title: string
   children: ReactNode
+  className?: string
 }
 
-export function Section({ id, title, children }: SectionProps) {
+export function Section({ id, title, children, className }: SectionProps) {
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-2xl border border-line bg-surface p-6 shadow-sm sm:p-8"
+      aria-labelledby={`${id}-heading`}
+      className={`resume-section${className ? ` ${className}` : ""}`}
     >
-      <h2 className="text-xl font-bold text-ink sm:text-2xl">{title}</h2>
-      <div className="mb-6 mt-2 h-1 w-10 rounded bg-primary" />
-      {children}
+      <h2 id={`${id}-heading`} className="resume-section__heading">
+        {title}
+      </h2>
+      <div className="resume-section__body">{children}</div>
     </section>
   )
 }
