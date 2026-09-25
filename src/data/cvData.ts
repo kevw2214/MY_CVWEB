@@ -1,4 +1,5 @@
 import type { CvData } from "../types/cv"
+import profilePhoto from "../assets/foto para mi cv.jpg"
 
 export const cvData: CvData = {
   personal: {
@@ -9,7 +10,7 @@ export const cvData: CvData = {
     phone: "+57 3012042883",
     linkedin: "in/kevin-davidcerpasantander-b2a8b3323",
     github: "kevw2214",
-    photo: "",
+    photo: profilePhoto,
   },
 
   profile: {

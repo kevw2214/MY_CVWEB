@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { X } from "lucide-react"
 import { ThemeToggle } from "./ThemeToggle"
 
 const NAV_ITEMS = [
@@ -13,15 +14,17 @@ const NAV_ITEMS = [
 
 interface SideNavProps {
   name: string
+  photo: string
   availableSections: string[]
 }
 
-export function SideNav({ name, availableSections }: SideNavProps) {
+export function SideNav({ name, photo, availableSections }: SideNavProps) {
   const items = useMemo(
     () => NAV_ITEMS.filter((item) => availableSections.includes(item.id)),
     [availableSections]
   )
   const [active, setActive] = useState<string>(items[0]?.id ?? "about")
+  const photoDialogRef = useRef<HTMLDialogElement>(null)
 
   const nameParts = name.trim().split(/\s+/).filter(Boolean)
   const shortName =
@@ -53,12 +56,55 @@ export function SideNav({ name, availableSections }: SideNavProps) {
   return (
     <nav aria-label="Navegación principal" className="site-nav">
       <div className="site-nav__inner">
-        <a className="site-brand" href="#top" aria-label={`${name}, volver al inicio`}>
-          <span aria-hidden="true" className="site-brand__mark">
-            {initials}
-          </span>
-          <span className="site-brand__name">{shortName}</span>
-        </a>
+        <div className="site-brand">
+          {photo !== "" ? (
+            <button
+              type="button"
+              className="site-brand__mark site-brand__avatar"
+              aria-label={`Ampliar foto de perfil de ${name}`}
+              aria-haspopup="dialog"
+              onClick={() => photoDialogRef.current?.showModal()}
+            >
+              <img src={photo} alt="" />
+            </button>
+          ) : (
+            <a className="site-brand__mark" href="#top" aria-label={`${name}, volver al inicio`}>
+              {initials}
+            </a>
+          )}
+          <a className="site-brand__name" href="#top">
+            {shortName}
+          </a>
+        </div>
+
+        {photo !== "" && (
+          <dialog
+            ref={photoDialogRef}
+            className="profile-photo-dialog"
+            aria-labelledby="profile-photo-title"
+            onClick={(event) => {
+              if (event.target === event.currentTarget) event.currentTarget.close()
+            }}
+          >
+            <h2 id="profile-photo-title" className="sr-only">
+              Foto de perfil de {name}
+            </h2>
+            <img
+              src={photo}
+              alt={`Foto de perfil de ${name}`}
+              className="profile-photo-dialog__image"
+            />
+            <button
+              type="button"
+              autoFocus
+              className="profile-photo-dialog__close"
+              aria-label="Cerrar foto ampliada"
+              onClick={() => photoDialogRef.current?.close()}
+            >
+              <X aria-hidden="true" className="h-5 w-5" />
+            </button>
+          </dialog>
+        )}
 
         <div className="site-nav__scroll">
           <div className="site-nav__links">

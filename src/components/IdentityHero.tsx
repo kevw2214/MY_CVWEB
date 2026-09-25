@@ -1,6 +1,6 @@
 import type { PersonalInfo, Profile } from "../types/cv"
 import { Download, Mail, MapPin } from "lucide-react"
-import heroBackground from "../assets/Hero-background.jpg"
+import heroBackground from "../assets/hero-background.jpg"
 import cvPdf from "../assets/cv/CV - FULLSTACK.pdf"
 
 interface IdentityHeroProps {

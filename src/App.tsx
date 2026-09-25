@@ -28,7 +28,11 @@ export default function App() {
       <a className="skip-link" href="#main-content">
         Saltar al contenido
       </a>
-      <SideNav name={cvData.personal.name} availableSections={availableSections} />
+      <SideNav
+        name={cvData.personal.name}
+        photo={cvData.personal.photo}
+        availableSections={availableSections}
+      />
 
       <main
         id="main-content"
